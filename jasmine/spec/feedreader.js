@@ -31,6 +31,19 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         function testAllFeedUrls(feed) {
+            //Thanks to http://regexr.com/37i6s for this URL RegEx matcher - modified to allow http.
+            var urlMatch = /http(s)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/;
+            it('has url for the feed ' + feed.name, function() {
+                expect(feed.url).toMatch(urlMatch);
+                expect(feed.url).toBeDefined();
+            });
+         }
+
+         console.log(allFeeds.length);
+         for(var i = 0; i < allFeeds.length; i++) {
+            testAllFeedUrls(allFeeds[i]);
+         }
 
 
         /* TODO: Write a test that loops through each feed
