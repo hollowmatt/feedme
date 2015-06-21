@@ -96,7 +96,7 @@ $(function() {
         //need to call the asynch function in the before each
         beforeEach(function(done) {
             //make the call to loadFeed, as is done in the app
-            loadFeed(0, function() {
+            loadFeed(2, function() {
                 done();
             });
         });
@@ -112,11 +112,26 @@ $(function() {
             done();
         });
     });
-    /* TODO: Write a new test suite named "New Feed Selection"
 
+    /* TODO: Write a new test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
+        var initialEntry = null;
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
 
+        beforeEach(function(done) {
+            initialEntry = $('.entry:first').text();
+            loadFeed(0, function() {
+                done();
+            });
+        });
+
+        it('updates the feed with new data when loadFeed is called', function(done) {
+            newEntry = $('.entry:first').text();
+            expect(newEntry).not.toEqual(initialEntry);
+            done();
+        });
+    });
 }());
